@@ -22,6 +22,7 @@ public class UserController {
 
     @RequestMapping
     public String getAllUsers(Model model) {
+
         List<User> list = userService.getAllUsers();
         model.addAttribute("users", list);
         return "users";
@@ -30,9 +31,11 @@ public class UserController {
     @RequestMapping(path = {"/edit", "/edit/{id}"})
     public String editUserById(Model model, @PathVariable("id") Optional<Integer> id)
             throws RecordNotFoundException {
+
         if (id.isPresent()) {
             User entity = userService.getUserById(id.get());
             model.addAttribute("user", entity);
+
         } else {
             model.addAttribute("user", new User());
         }
@@ -41,12 +44,14 @@ public class UserController {
 
     @RequestMapping(path = "/createEmployee", method = RequestMethod.POST)
     public String createOrUpdateUser(User user) {
+
         userService.createOrUpdateUser(user);
         return "redirect:/";
     }
 
     @RequestMapping(path = "/delete/{id}", method = RequestMethod.DELETE)
     public String deleteUserById(Model model, @PathVariable("id") Integer id) throws RecordNotFoundException {
+
         userService.deleteUser(id);
         return "redirect:/";
     }

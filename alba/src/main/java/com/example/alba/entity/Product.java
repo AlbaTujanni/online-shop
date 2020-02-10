@@ -6,6 +6,7 @@ import java.util.Objects;
 @Entity
 @Table(name = "product", schema = "online_shop")
 public class Product {
+
     private int productId;
     private String name;
     private Double price;

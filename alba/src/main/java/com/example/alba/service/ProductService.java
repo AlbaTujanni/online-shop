@@ -17,7 +17,9 @@ public class ProductService {
     ProductRepository productRepository;
 
     public List<Product> getAllProducts() {
+
         List<Product> resultProducts = (List<Product>) productRepository.findAll();
+
         if (resultProducts.size() > 0) {
             return resultProducts;
         } else {
@@ -26,19 +28,23 @@ public class ProductService {
     }
 
     public Product getProductByID(Integer id) throws RecordNotFoundException {
+
         Optional<Product> product = productRepository.findById(id);
+
         if (product.isPresent()) {
             return product.get();
         } else throw new RecordNotFoundException("No products found");
     }
 
     public Product createOrUpdateProduct(Product product) {
+
         if (product.getProductId() == null) {
             product = productRepository.save(product);
             return product;
 
         } else {
             Optional<Product> optionalProduct = productRepository.findById(product.getProductId());
+
             if (optionalProduct.isPresent()) {
                 Product newEntity = optionalProduct.get();
                 newEntity.setName(product.getName());
@@ -54,6 +60,7 @@ public class ProductService {
     }
 
     public void deleteProduct(Integer id) throws RecordNotFoundException {
+
         Optional<Product> product = productRepository.findById(id);
         if (product.isPresent()) {
             productRepository.deleteById(id);

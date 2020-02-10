@@ -1,6 +1,7 @@
 package com.example.alba.entity;
 
 import javax.persistence.*;
+import java.util.Date;
 import java.util.Objects;
 
 @Entity
@@ -9,14 +10,15 @@ public class Order {
 
     private int orderId;
     private String orderDescription;
+    private Date orderDate;
 
     @Id
     @Column(name = "order_id")
-    public int getOrderId() {
+    public Integer getOrderId() {
         return orderId;
     }
 
-    public void setOrderId(int orderId) {
+    public void setOrderId(Integer orderId) {
         this.orderId = orderId;
     }
 
@@ -28,6 +30,17 @@ public class Order {
 
     public void setOrderDescription(String orderDescription) {
         this.orderDescription = orderDescription;
+    }
+
+
+    @Basic
+    @Column(name = "order_date")
+    public Date getOrderDate() {
+        return orderDate;
+    }
+
+    public void setOrderDate(Date orderDate) {
+        this.orderDate = orderDate;
     }
 
     @Override
