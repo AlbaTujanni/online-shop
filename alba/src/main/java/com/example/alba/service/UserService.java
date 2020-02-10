@@ -28,6 +28,7 @@ public class UserService {
     }
 
     public User getUserById(Integer id) throws RecordNotFoundException {
+
         Optional<User> user = userRepository.findById(id);
         if (user.isPresent()) {
             return user.get();
