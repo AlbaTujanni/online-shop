@@ -2,7 +2,7 @@ package com.example.alba.controller;
 
 import com.example.alba.RecordNotFoundException;
 import com.example.alba.entity.User;
-import com.example.alba.service.UserService;
+import com.example.alba.service.UserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,18 +14,18 @@ import java.util.List;
 import java.util.Optional;
 
 @Controller
-@RequestMapping("/")
+@RequestMapping("/admin/userAdministration")
 public class UserController {
 
     @Autowired
-    UserService userService;
+    UserServiceImpl userServiceImpl;
 
     @RequestMapping
     public String getAllUsers(Model model) {
 
-        List<User> list = userService.getAllUsers();
+        List<User> list = userServiceImpl.getAllUsers();
         model.addAttribute("users", list);
-        return "users";
+        return "userAdministration";
     }
 
     @RequestMapping(path = {"/edit", "/edit/{id}"})
@@ -33,7 +33,7 @@ public class UserController {
             throws RecordNotFoundException {
 
         if (id.isPresent()) {
-            User entity = userService.getUserById(id.get());
+            User entity = userServiceImpl.getUserById(id.get());
             model.addAttribute("user", entity);
 
         } else {
@@ -45,14 +45,14 @@ public class UserController {
     @RequestMapping(path = "/createEmployee", method = RequestMethod.POST)
     public String createOrUpdateUser(User user) {
 
-        userService.createOrUpdateUser(user);
+        userServiceImpl.createOrUpdateUser(user);
         return "redirect:/";
     }
 
     @RequestMapping(path = "/delete/{id}", method = RequestMethod.DELETE)
     public String deleteUserById(Model model, @PathVariable("id") Integer id) throws RecordNotFoundException {
 
-        userService.deleteUser(id);
+        userServiceImpl.deleteUser(id);
         return "redirect:/";
     }
 

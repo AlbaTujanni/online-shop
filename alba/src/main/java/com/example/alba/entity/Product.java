@@ -1,6 +1,9 @@
 package com.example.alba.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
+import java.util.List;
 import java.util.Objects;
 
 @Entity
@@ -40,6 +43,11 @@ public class Product {
     public void setPrice(Double price) {
         this.price = price;
     }
+
+    @JsonIgnore
+    @ManyToMany(fetch = FetchType.LAZY,
+            mappedBy = "products")
+    private List<Order> order;
 
     @Override
     public boolean equals(Object o) {
