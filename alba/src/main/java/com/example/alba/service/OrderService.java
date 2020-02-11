@@ -4,13 +4,14 @@ import com.example.alba.RecordNotFoundException;
 import com.example.alba.entity.Order;
 import com.example.alba.repository.OrderRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-@Service
+@Component
 public class OrderService {
     @Autowired
     OrderRepository orderRepository;

@@ -4,13 +4,14 @@ import com.example.alba.RecordNotFoundException;
 import com.example.alba.entity.User;
 import com.example.alba.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-@Service
+@Component
 public class UserService {
 
     @Autowired

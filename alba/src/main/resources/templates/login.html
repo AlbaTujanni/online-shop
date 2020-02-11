@@ -1,57 +1,79 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
->
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3"
+      layout:decorator="layout">
 <head>
-    <title>Spring Security Example </title>
-    <div th:replace="fragments/header :: header-css"/>
+    <title>Log in</title>
 </head>
 <body>
 
-<div th:replace="fragments/header :: header"/>
-
-<div class="container">
-
-    <div class="row" style="margin-top:20px">
-        <div class="col-xs-12 col-sm-8 col-md-6 col-sm-offset-2 col-md-offset-3">
-            <form th:action="@{/login}" method="post">
-                <fieldset>
-                    <h1>Please Sign In</h1>
-
-                    <div th:if="${param.error}">
-                        <div class="alert alert-danger">
-                            Invalid username and password.
+<div layout:fragment="content">
+    <!--        <div class="card">-->
+    <div class="card-body-modifier">
+        <div class="card-body">
+            <div class="panel col-md-5">
+                <div class="panel panel-primary">
+                    <div class="panel-heading">Login Form</div>
+                    <div class="panel-body">
+                        <div class="form">
+                            <form action="home" th:action="@{/login}" method="post">
+                                <div class="form-group has-feedback">
+                                    <input type="text" class="form-control" name="username"
+                                           placeholder="Name"/> <span
+                                        class="glyphicon glyphicon-envelope form-control-feedback"></span>
+                                </div>
+                                <div class="form-group has-feedback">
+                                    <input type="email" class="form-control" name="email"
+                                           placeholder="Email"/> <span
+                                        class="glyphicon glyphicon-lock form-control-feedback"></span>
+                                </div>
+                                <div class="form-group">
+                                    <label>
+                                        <input type="checkbox" name="remember-me"> Remember Me
+                                    </label>
+                                </div>
+                                <div class="row">
+                                    <div class="form-group col-xs-offset-8 col-xs-4">
+                                        <button type="submit" class="btn btn-primary btn-block btn-flat"
+                                                th:text="#{label.login}">LogIn
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-xs-12">
+                                        <div th:if="${param.error}"
+                                             class="alert alert-danger alert-dismissable">
+                                            <p>
+                                                <i class="icon fa fa-ban"></i> <span
+                                                    th:text="#{error.login_failed}">Invalid Email and
+											Password.</span>
+                                            </p>
+                                        </div>
+                                        <div th:if="${param.logout}"
+                                             class="alert alert-info alert-dismissable">
+                                            <p>
+                                                <i class="icon fa fa-info"></i> <span
+                                                    th:text="#{info.logout_success}">You have been logged
+											out.</span>
+                                            </p>
+                                        </div>
+                                        <div th:if="${msg!=null}"
+                                             class="alert alert-warning alert-dismissable">
+                                            <p>
+                                                <i class="icon fa fa-warning"></i> <span th:text="${msg}"></span>
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
                         </div>
                     </div>
-                    <div th:if="${param.logout}">
-                        <div class="alert alert-info">
-                            You have been logged out.
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <input type="text" name="username" id="username" class="form-control input-lg"
-                               placeholder="UserName" required="true" autofocus="true"/>
-                    </div>
-                    <div class="form-group">
-                        <input type="password" name="password" id="password" class="form-control input-lg"
-                               placeholder="Password" required="true"/>
-                    </div>
-
-                    <div class="row">
-                        <div class="col-xs-6 col-sm-6 col-md-6">
-                            <input type="submit" class="btn btn-lg btn-primary btn-block" value="Sign In"/>
-                        </div>
-                        <div class="col-xs-6 col-sm-6 col-md-6">
-                        </div>
-                    </div>
-                </fieldset>
-            </form>
-        </div>
-    </div>
-
+                </div>
+            </div>
+        </div></div>
 </div>
-
-<div th:replace="fragments/footer :: footer"/>
-
+</div>
 </body>
 </html>

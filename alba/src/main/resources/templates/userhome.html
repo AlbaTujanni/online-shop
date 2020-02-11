@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3"
+      layout:decorator="layout">
+<head>
+    <title>User Home</title>
+</head>
+<body>
+<div layout:fragment="content">
+    <p>
+        Logged in as <span sec:authentication="principal.username">User</span>
+    </p>
+
+    <h3>User Actions</h3>
+    <p> </p>
+    <a th:href="@{/user/trips/addTrip}"class="btn btn-outline-primary">Browse products</a>
+    <p> </p>
+    <p><a th:href="@{/user/trips}" class="btn btn-outline-primary">My orders</a></p>
+
+    <div>
+        <br>
+        <div class="panel panel-default">
+            <div class="panel-heading">
+
+            </div>
+
+            <p th:each="msg: ${msgs}" th:text="${msg.content}"></p>
+        </div>
+    </div>
+</div>
+<p>
+    <a th:href="@{/logout}">Logout</a>
+</p>
+<p>
+    <a th:href="@{/logout}">Logout</a>
+</p>
+
+</body>
+
+</html>

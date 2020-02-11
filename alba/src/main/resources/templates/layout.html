@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3" lang="EN">
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title layout:title-pattern="$DECORATOR_TITLE - $CONTENT_TITLE">OnlineShop</title>
+    <meta
+            content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"
+            name="viewport" />
+    <link rel="stylesheet"
+          th:href="@{/assets/bootstrap/css/bootstrap.min.css}" />
+    <link rel="stylesheet"
+          th:href="@{/assets/fontawesome-free-5.11.2-web/css/all.css}" />
+    <link rel="stylesheet" th:href="@{/assets/css/styles.css}" />
+</head>
+
+<body>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container">
+        <div class="navbar-header">
+            <!--				<i class="fas fa-plane"></i>-->
+            <a class="navbar-brand"  th:href="@{/}">Home</a>
+            <a class="navbar-brand"  th:href="@{/user/trips}">My Trips</a>
+            <a class="navbar-brand"  th:href="@{/user/flights}">My Flights</a>
+            <a sec:authorize="isAuthenticated() && hasRole('ROLE_ADMIN')" class="navbar-brand" href="#" th:href="@{/admin/userAdministration/addUser}">Add New User<i class="fas fa-user-cog"></i></a>
+            <a sec:authorize="isAuthenticated() && hasRole('ROLE_ADMIN')" class="navbar-brand" href="#" th:href="@{/admin/userAdministration}">All Users</a>
+            <a sec:authorize="isAuthenticated() && hasRole('ROLE_ADMIN')" class="navbar-brand" href="#" th:href="@{/admin/adminhome}">Review Trips</a>
+        </div>
+    </div>
+    <a class="btn btn-outline-success my-2 my-sm-0" sec:authorize="!isAuthenticated()" th:href="@{/login}">Login</a>
+    <a class="btn btn-outline-danger my-2 my-sm-0" sec:authorize="isAuthenticated()" th:href="@{/logout}">Logout</a>
+</nav>
+<div class="container-fluid backgroundimg">
+    <!--	<div class="backgroundimg">-->
+    <div class="container pt-5">
+
+        <div layout:fragment="content">
+            <!-- Your Page Content Here -->
+            <!--		</div>-->
+        </div>
+    </div>
+</div>
+<script th:src="@{'/assets/js/jquery-3.4.1.min.js'}"></script>
+<script th:src="@{'/assets/js/popper.min.js'}"></script>
+<script th:src="@{'/assets/js/ajax.js'}"></script>
+<script th:src="@{'/assets/bootstrap/js/bootstrap.min.js'}"></script>
+
+</body>
+</html>
